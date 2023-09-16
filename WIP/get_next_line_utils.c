@@ -3,34 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajordan- <ajordan-@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: mheinke <mheinke@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/16 10:12:58 by ajordan-          #+#    #+#             */
-/*   Updated: 2021/10/20 10:05:53 by ajordan-         ###   ########.fr       */
+/*   Created: 2023/09/13 11:09:26 by mheinke           #+#    #+#             */
+/*   Updated: 2023/09/16 13:21:51 by mheinke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-*	---------
-*	GET_LINE
-*	---------
-*	Extracts the line (ending in either line break and `\0` or only `\0` in EOF)
-*	from static variable.
-*	PARAMETERS
-*	#1. The pointer to the cumulative static variable from previous runs of get_next_line.
-*	RETURN VALUES
-*	The string with the full line ending in a line break (`\n`) + (`\0`).
-*	-------------
-*	NEW_LEFT_STR
-*	-------------
-*	Stores in the cumulative static variable the new updated variable with whatever
-*	is left from the original, minus the line extracted.
-*	PARAMETERS
-*	#1. The pointer to the cumulative static variable from previous runs of get_next_line.
-*	RETURN VALUES
-*	The new updated string with whatever is left from the original static, minus the
-*	line extracted.
-*/
 
 #include "get_next_line.h"
 

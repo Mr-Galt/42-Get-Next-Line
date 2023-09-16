@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajordan- <ajordan-@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: mheinke <mheinke@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/16 10:12:35 by ajordan-          #+#    #+#             */
-/*   Updated: 2021/10/20 00:19:06 by ajordan-         ###   ########.fr       */
+/*   Created: 2023/09/13 11:09:44 by mheinke           #+#    #+#             */
+/*   Updated: 2023/09/16 13:21:37 by mheinke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
