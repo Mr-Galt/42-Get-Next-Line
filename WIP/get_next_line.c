@@ -6,49 +6,104 @@
 /*   By: mheinke <mheinke@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:09:10 by mheinke           #+#    #+#             */
-/*   Updated: 2023/09/16 13:21:19 by mheinke          ###   ########.fr       */
+/*   Updated: 2023/09/18 12:13:02 by mheinke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <unistd.h>
 
-char	*ft_read_to_left_str(int fd, char *left_str)
+size_t	ft_end_of_line(char *str, size_t i)
 {
-	char	*buff;
-	int		rd_bytes;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\n')
+		i++;
+	return (i);
+}
 
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
+char	*ft_move_pointer(char *str)
+{
+	char	*new_str;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	if (str[i] == '\0')
+		return (free(str), NULL);
+	i = ft_end_of_line(str, i);
+	new_str = (char *)malloc((ft_strlen(str) - i + 1));
+	if (!new_str)
+		return (free(new_str), NULL);
+	while (str[i])
+		new_str[j++] = str[i++];
+	new_str[j] = '\0';
+	if (!new_str[0])
+		return (free(str), free(new_str), NULL);
+	free(str);
+	return (new_str);
+}
+
+char	*ft_read_line(char *str)
+{
+	char	*line;
+	size_t	i;
+
+	i = 0;
+	if (!str || str[0] == '\0')
 		return (NULL);
-	rd_bytes = 1;
-	while (!ft_strchr(left_str, '\n') && rd_bytes != 0)
+	i = ft_end_of_line(str, i);
+	line = (char *)malloc(sizeof(char) * i + 1);
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (str[i] && str[i] != '\n')
 	{
-		rd_bytes = read(fd, buff, BUFFER_SIZE);
-		if (rd_bytes == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
-		buff[rd_bytes] = '\0';
-		left_str = ft_strjoin(left_str, buff);
+		line[i] = str[i];
+		i++;
 	}
-	free(buff);
-	return (left_str);
+	if (str[i] == '\n')
+	{
+		line[i] = str[i];
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+char	*ft_free(char *buff1, char *buff2)
+{
+	free(buff1);
+	free(buff2);
+	buff2 = NULL;
+	return (buff2);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*line;
-	static char	*left_str;
+	char		*read_content;
+	int			read_bytes;
+	static char	*read_buffer;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	left_str = ft_read_to_left_str(fd, left_str);
-	if (!left_str)
+	read_bytes = 1;
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
 		return (NULL);
-	line = ft_get_line(left_str);
-	left_str = ft_new_left_str(left_str);
-	return (line);
+	read_content = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!read_content)
+		return (NULL);
+	while (!(ft_strchr(read_buffer, '\n')) && read_bytes != 0)
+	{
+		read_bytes = read(fd, read_content, BUFFER_SIZE);
+		if (read_bytes == -1)
+		{
+			read_buffer = ft_free(read_content, read_buffer);
+			return (NULL);
+		}
+		read_content[read_bytes] = '\0';
+		read_buffer = ft_strjoin(read_buffer, read_content);
+	}
+	free(read_content);
+	read_content = ft_read_line(read_buffer);
+	read_buffer = ft_move_pointer(read_buffer);
+	return (read_content);
 }
-
