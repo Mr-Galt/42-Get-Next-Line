@@ -6,7 +6,7 @@
 /*   By: mheinke <mheinke@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:09:26 by mheinke           #+#    #+#             */
-/*   Updated: 2023/09/18 12:13:01 by mheinke          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:27:32 by mheinke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,31 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strcpy(char *dest, const char *src)
+char	*ft_strdup(const char *s)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = 0;
-	while (src[i])
+	j = ft_strlen(s);
+	str = (char *)malloc(sizeof(*str) * (j + 1));
+	if (!str)
+		return (NULL);
+	while (i < j)
 	{
-		dest[i] = src[i];
+		str[i] = s[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(const char *src)
-{
-	unsigned int	len;
-	char			*dest;
-
-	len = ft_strlen(src);
-	dest = (char *)malloc(sizeof(char) * (len + 1));
-	if (!dest)
-		return (NULL);
-	return (ft_strcpy(dest, src));
+	str[i] = '\0';
+	return (str);
 }
 
 char	*ft_strjoin(char *buffer, char *content)
 {
-	char	*result;
 	size_t	i;
 	size_t	j;
+	char	*result;
 
 	if (!buffer)
 		return (ft_strdup(content));

@@ -6,7 +6,7 @@
 /*   By: mheinke <mheinke@student.42abudhabi.ae>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:09:44 by mheinke           #+#    #+#             */
-/*   Updated: 2023/09/18 12:13:04 by mheinke          ###   ########.fr       */
+/*   Updated: 2023/09/26 11:37:49 by mheinke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_move_pointer(char *str);
-char	*ft_read_line(char *str);
+char	*get_string(char *str);
+char	*read_the_line(char *str);
+char	*free_and_null(char *buff1, char *buff2);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
-char	*ft_strncpy(char *dest, const char *src, size_t n);
 char	*ft_strdup(const char *src);
 char	*ft_strjoin(char *s1, char *s2);
 
